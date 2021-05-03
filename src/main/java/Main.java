@@ -24,13 +24,13 @@ public class Main {
 
 
         // Выводим все параметры перед передачей их в функцию
-//        System.out.println("flag_r: " + flag_r);
-//        System.out.println("flag_d: " + flag_d);
-//        System.out.println("dir: " + dir);
-//        System.out.println("filename: " + filename);
+        System.out.println("flag_r: " + flag_r);
+        System.out.println("flag_d: " + flag_d);
+        System.out.println("dir: " + dir);
+        System.out.println("filename: " + filename);
 
-
-        System.out.println(Searcher.search(System.getProperty("user.dir"),"text3.txt",false));
+        System.out.println(args.toString());
+        System.out.println(Searcher.search(dir,filename,flag_r));
     }
 }
 
