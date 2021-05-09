@@ -1,36 +1,43 @@
-import org.junit.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
 
-public class SearcherTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SearcherTest {
+
+    static String homePath;
+
+    @BeforeAll
+    static void beforeAll() {
+        homePath = System.getProperty("user.dir");
+    }
+
 
 
     @Test
-    //успешный поиск с атрибутом р и д
-    public void search_success_with_r_attribute_and_with_dir_name() {
-        assertEquals("/Users/useruser/Desktop/Java/src/main/java/2/text2.txt", Searcher.search("/Users/useruser/Desktop/Java/src/main/java", "text2.txt",true));
+    void search_success_with_r_attribute_and_with_dir_name() {
+        assertEquals(homePath + "/testData/text1.txt", (Searcher.search(homePath,"text1.txt", true, new ArrayList<String>())));
 
     }
 
     @Test
-    //
-    public void search_unsuccessful_with_r_attribute_and_with_dir_name() {
-        assertEquals(null,Searcher.search("/Users/useruser/Desktop/Java/src/main/java", "text3.txt",true));
-
-    }
-
-
-    @Test
-    public void search_success_without_r_attribute_and_with_dir_name() {
-        assertEquals("/Users/useruser/Desktop/Java/src/main/java/text1.txt",Searcher.search("/Users/useruser/Desktop/Java/src/main/java", "text1.txt",false));
+    void search_unsuccessful_with_r_attribute_and_with_dir_name() {
+        assertEquals(null, (Searcher.search(homePath + "/src/main/java","text1.txt", true, new ArrayList<String>())));
 
     }
 
     @Test
-    public void search_unsuccessful_without_r_attribute_and_with_dir_name() {
-        assertEquals(null,Searcher.search("/Users/useruser/Desktop/Java/src/main/java", "text2.txt",false));
+    void search_success_without_r_attribute_and_with_dir_name() {
+        assertEquals(homePath + "/testData/1/text2.txt", (Searcher.search(homePath + "/testData/1","text2.txt", false, new ArrayList<String>())));
 
     }
 
+    @Test
+    void search_unsuccessful_without_r_attribute_and_with_dir_name()  {
+        assertEquals( null, (Searcher.search(homePath + "/testData","text2.txt", false, new ArrayList<String>())));
+
+    }
 
 }
