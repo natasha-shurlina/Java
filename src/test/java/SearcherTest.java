@@ -15,29 +15,31 @@ class SearcherTest {
     }
 
 
-
     @Test
     void search_success_with_r_attribute_and_with_dir_name() {
-        assertEquals(homePath + "/testData/text1.txt", (Searcher.search(homePath,"text1.txt", true, new ArrayList<String>())));
+        assertTrue( (Searcher.search(homePath,"text1.txt", true, new ArrayList<String>()))
+                .contains(homePath + "/testData/text1.txt"));
 
     }
 
     @Test
     void search_unsuccessful_with_r_attribute_and_with_dir_name() {
-        assertEquals(null, (Searcher.search(homePath + "/src/main/java","text1.txt", true, new ArrayList<String>())));
+          assertFalse( (Searcher.search(homePath + "/src/main/java","text1.txt", true,
+                  new ArrayList<String>())).contains(false));
 
     }
 
     @Test
     void search_success_without_r_attribute_and_with_dir_name() {
-        assertEquals(homePath + "/testData/1/text2.txt", (Searcher.search(homePath + "/testData/1","text2.txt", false, new ArrayList<String>())));
+         assertTrue( (Searcher.search(homePath + "/testData/1","text2.txt", false,
+                 new ArrayList<String>())).contains(homePath + "/testData/1/text2.txt"));
 
     }
 
     @Test
     void search_unsuccessful_without_r_attribute_and_with_dir_name()  {
-        assertEquals( null, (Searcher.search(homePath + "/testData","text2.txt", false, new ArrayList<String>())));
-
+          assertFalse( (Searcher.search(homePath + "/testData","text2.txt", false,
+                  new ArrayList<String>())).contains(false));
     }
 
 }

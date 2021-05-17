@@ -15,7 +15,7 @@ public class Main {
 
         for(int i =0; i < args.length; i++){
             if((args[i]).equals("-r") ) flagR = true;
-            if((args[i]).equals("-d")){  dir = args[i + 1];}
+            if((args[i]).equals("-d") && (args.length - 1 >= i + 1)) {  dir = args[i + 1];}
             if( i == (args.length -1)) filename = args[i];
 
         }
@@ -24,7 +24,7 @@ public class Main {
 
         List<String> results = new ArrayList<String>();
 
-        Searcher.search(dir,filename,flagR, results);
+        Searcher.search(dir, filename, flagR, results);
         for(String el : results) System.out.println(el);
     }
 }
@@ -32,7 +32,7 @@ public class Main {
 class Searcher {
 
 
-    public static String search(String directory, String fileName, boolean r, List<String> results) {
+    public static List<String> search(String directory, String fileName, boolean r, List<String> results) {
 
         File dir = new File(directory);
 
@@ -43,7 +43,10 @@ class Searcher {
 
         File[] fileArray = dir.listFiles();
 
-        if (fileArray != null) {
+        if (fileArray == null) {
+            System.out.println("Папка пустая!!!");
+            return null;
+        }
 
             if (r == false) {
 
@@ -65,10 +68,10 @@ class Searcher {
 
                     if (file.isDirectory() ) {
 
-                        search(file.getPath(), fileName, true,results);
+                        search(file.getPath(), fileName, true, results);
                     }else{
 
-                        if((file.getName()).equals((String)fileName)){
+                        if((file.getName()).equals(fileName)){
                             results.add(file.getAbsolutePath());
                         }
                     }
@@ -76,8 +79,7 @@ class Searcher {
 
 
             }
-        } else System.out.println("Папка пустая!!!");
-        if (results.isEmpty()) return null;
-        return results.toString().replaceAll("^\\[|\\]$","");
+
+        return results;
     }
 }
