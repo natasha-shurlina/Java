@@ -48,38 +48,24 @@ class Searcher {
             return null;
         }
 
-            if (r == false) {
 
-                for (File file : fileArray) {
+        for (File file : fileArray) {
 
-                    if (!file.isDirectory()){
-
-                        if((file.getName()).equals((String)fileName)) {
-
-                            results.add(file.getAbsolutePath());
-                        }
-                    }
-                }
-
+            if (file.isDirectory() && (r == true)) {
+                    search(file.getPath(), fileName, true, results);
             }
 
-            else {
-                for (File file : fileArray) {
+            if (!file.isDirectory()){
 
-                    if (file.isDirectory() ) {
+                if((file.getName()).equals(fileName)) {
 
-                        search(file.getPath(), fileName, true, results);
-                    }else{
+                    results.add(file.getAbsolutePath());
 
-                        if((file.getName()).equals(fileName)){
-                            results.add(file.getAbsolutePath());
-                        }
-                    }
                 }
-
-
             }
+        }
 
         return results;
     }
+
 }
